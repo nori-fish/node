@@ -1,11 +1,9 @@
-function _node_install --on-event node_install
+function _node_install --on-event node_install --on-event node_update
     fisher install nori-fish/fnm
-    fnm install (fnm list-remote | tail -n1 | string replace --regex '^v' '')
-end
-
-function _node_update --on-event node_update
-    fisher update nori-fish/fnm
-    fnm install (fnm list-remote | tail -n1 | string replace --regex '^v' '')
+    set --function latest_version (fnm list-remote | tail -n1 | string replace --regex '^v' '')
+    fnm install $latest_version
+    fnm alias $latest_version latest
+    fnm use latest
 end
 
 function _node_uninstall --on-event node_uninstall
