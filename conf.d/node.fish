@@ -13,6 +13,6 @@ end
 
 function _node_uninstall --on-event node_uninstall
     if command --query fnm
-        fisher uninstall nori-fish/fnm
+        fisher remove nori-fish/fnm
     end
 end
